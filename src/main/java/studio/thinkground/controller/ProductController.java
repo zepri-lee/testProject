@@ -18,6 +18,8 @@ import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.Valid;
+import studio.thinkground.common.Constants.ExceptionClass;
+import studio.thinkground.common.exception.AroundHubException;
 import studio.thinkground.data.dto.ProductDto;
 import studio.thinkground.service.ProductService;
 
@@ -103,8 +105,8 @@ public class ProductController {
     return null;
   }
 
-//  @PostMapping(value = "/product/exception")
-//  public void exceptionTest() throws AroundHubException {
-//    throw new AroundHubException(ExceptionClass.PRODUCT, HttpStatus.FORBIDDEN, "접근이 금지되었습니다.");
-//  }
+  @PostMapping(value = "/product/exception")
+  public void exceptionTest() throws AroundHubException {
+    throw new AroundHubException(ExceptionClass.PRODUCT, HttpStatus.FORBIDDEN, "접근이 금지되었습니다.");
+  }
 }
