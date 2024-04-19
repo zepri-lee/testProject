@@ -2,6 +2,7 @@ package studio.thinkground.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +23,13 @@ public class User3Controller extends AbstractService {
     }	
 
 	@PostMapping(value="user3")
-	public UserDTO3 userJson(@RequestBody UserDTO3 userDto3) {
+//	public UserDTO3 userJson(@RequestBody UserDTO3 userDto3) {
+	public ResponseEntity<UserDTO3> userJson(@RequestBody UserDTO3 userDto3) {	
 		
 		System.out.println("userDto3 : "+userDto3.toString());
 		
-		return restTemplate.postForObject("http://localhost:8080/api/v1/userRest", userDto3, UserDTO3.class);
+//		return restTemplate.postForObject("http://localhost:8080/api/v1/userRest", userDto3, UserDTO3.class);
+		return restTemplate.postForEntity("http://localhost:8080/api/v1/userRest", userDto3, UserDTO3.class);
 		
 	}
 	

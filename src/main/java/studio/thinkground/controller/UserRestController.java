@@ -1,5 +1,7 @@
 package studio.thinkground.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,15 +20,18 @@ public class UserRestController  {
 //	private final Logger LOGGER = LoggerFactory.getLogger(User2Controller.class);	
 
 	@PostMapping(value="userRest")
-	public UserDTO3 userRest(@RequestBody UserDTO3 userDto3) throws JsonProcessingException {
+//	public UserDTO3 userRest(@RequestBody UserDTO3 userDto3) throws JsonProcessingException {
+	public ResponseEntity<UserDTO3> userRest(@RequestBody UserDTO3 userDto3) throws JsonProcessingException {
 		
 		System.out.println("userDtoRest : "+userDto3.toString());
 		String requestMessage = null;
 
 		ObjectMapper object = new ObjectMapper();
 		requestMessage = object.writeValueAsString(userDto3);
+		System.out.println("requestMessage : "+requestMessage);		
+		UserDTO3 rtnUserDto3 = userDto3ToObject(requestMessage);
 		
-		return userDto3ToObject(requestMessage);
+		return ResponseEntity.status(HttpStatus.OK).body(rtnUserDto3);
 	}
 	
 	public UserDTO3 userDto3ToObject(String requestMessage) throws JsonMappingException, JsonProcessingException {
